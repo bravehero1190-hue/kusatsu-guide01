@@ -8,185 +8,310 @@
   :root { --p-scale: 1.0; }
   @page { size: A5 portrait; margin: 4mm 5mm; }
   * { box-sizing: border-box; font-family: "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif; }
-  html, body { margin: 0; padding: 0; background: #f8fafc; color: #000; width: 100%; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body {
+    margin: 0; padding: 0; background: #ffffff; color: #000000; width: 100%;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
 
+  /* 画面上部操作バー（印刷時は非表示） */
   .no-print-bar {
-    padding: 10px 14px; background: #0f172a; color: #fff;
+    padding: 8px 12px; background: #0f172a; color: #fff;
     display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap;
     position: sticky; top: 0; z-index: 100;
   }
-  .sz-btn { padding: 6px 10px; font-size: 12px; font-weight: bold; border-radius: 5px; border: 1px solid #64748b; background: #1e293b; color: #fff; cursor: pointer; }
+  .sz-btn {
+    padding: 5px 10px; font-size: 12px; font-weight: bold;
+    border-radius: 5px; border: 1px solid #64748b; background: #1e293b; color: #fff; cursor: pointer;
+  }
   .sz-btn.active { background: #38bdf8; color: #000; border-color: #38bdf8; }
-  .np-btn { padding: 8px 14px; font-size: 13px; font-weight: 900; border-radius: 6px; border: none; background: #d4af37; color: #000; cursor: pointer; }
+  .np-btn {
+    padding: 7px 14px; font-size: 14px; font-weight: 900;
+    border-radius: 6px; border: none; background: #d4af37; color: #000; cursor: pointer;
+  }
 
-  .a5-wrap { width: 100%; max-width: 138mm; margin: 10px auto; background: #fff; padding: 12px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
-  .a5-page-1 { width: 100%; border-bottom: 2px dashed #cbd5e1; padding-bottom: 14px; margin-bottom: 16px; }
-  .a5-page-2 { width: 100%; }
+  .a5-wrap { width: 100%; max-width: 138mm; margin: 0 auto; padding: 4px; }
+  .a5-page-1 { width: 100%; page-break-after: always; break-after: page; }
+  .a5-page-2 { width: 100%; page-break-after: avoid; break-after: avoid; }
 
-  .hdr { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #000; padding-bottom: 1.2mm; margin-bottom: 2.5mm; }
-  .h-title { font-size: calc(12pt * var(--p-scale)); font-weight: 900; }
-  .h-rm    { font-size: calc(10pt * var(--p-scale)); font-weight: 900; }
+  .hdr {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-bottom: 2px solid #000; padding-bottom: 1.2mm; margin-bottom: 1.8mm;
+  }
+  .h-title { font-size: calc(11.5pt * var(--p-scale)); font-weight: 900; }
+  .h-rm { font-size: calc(9.5pt * var(--p-scale)); font-weight: 900; }
 
-  .ticket { border: 2px solid #000; border-radius: 5px; padding: 2mm 2.5mm; margin-bottom: 2.5mm; background: #f8f8f8; }
-  .tk-head { font-size: calc(8pt * var(--p-scale)); font-weight: 900; border-bottom: 1px solid #555; padding-bottom: 1mm; margin-bottom: 1.5mm; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
-  .tk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm; }
-  .tk-box  { border: 1.2px solid #000; border-radius: 4px; padding: 1.5mm 2mm; background: #fff; text-align: center; }
-  .tk-lbl  { font-size: calc(7.2pt * var(--p-scale)); font-weight: bold; }
-  .tk-val  { font-size: calc(12.5pt * var(--p-scale)); font-weight: 900; line-height: 1.15; margin-top: 2px; }
+  /* お客様のお部屋バナー */
+  .room-banner {
+    text-align: center; font-size: calc(10.5pt * var(--p-scale)); font-weight: 900;
+    border: 1.8px solid #000; background: #f4f4f4;
+    padding: 1.2mm 2mm; border-radius: 4px; margin-bottom: 1.8mm;
+  }
 
-  .sec-stack { display: flex; flex-direction: column; gap: 2mm; }
-  .sec { border: 1px solid #333; border-radius: 4px; padding: 1.8mm 2.5mm; font-size: calc(8.3pt * var(--p-scale)); line-height: 1.38; page-break-inside: avoid; break-inside: avoid; }
-  .sec-t { font-size: calc(9pt * var(--p-scale)); font-weight: 900; border-bottom: 1px solid #888; margin-bottom: 1.2mm; padding: 0.5mm 2mm; background: #eeeeee; border-radius: 2px; }
-  .hl { border: 1px solid #000; background: #f4f4f4; padding: 1.2mm 2mm; border-radius: 3px; margin: 1mm 0; font-weight: bold; }
-  .pin { display: inline-block; border: 1.8px solid #000; padding: 0.5mm 4mm; font-size: calc(12.5pt * var(--p-scale)); font-weight: 900; letter-spacing: 3px; border-radius: 4px; margin-left: 2mm; background: #fff; }
+  /* お食事券枠 */
+  .ticket {
+    border: 2px solid #000; border-radius: 5px;
+    padding: 1.6mm 2.4mm; margin-bottom: 1.8mm; background: #f8f8f8;
+  }
+  .tk-head {
+    font-size: calc(7.8pt * var(--p-scale)); font-weight: 900;
+    border-bottom: 1px solid #555; padding-bottom: 0.8mm; margin-bottom: 1.4mm;
+    display: flex; justify-content: space-between;
+  }
+  .tk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; }
+  .tk-box {
+    border: 1.2px solid #000; border-radius: 4px; padding: 1.1mm 2mm;
+    background: #fff; text-align: center;
+  }
+  .tk-lbl { font-size: calc(7pt * var(--p-scale)); font-weight: bold; }
+  .tk-val { font-size: calc(12pt * var(--p-scale)); font-weight: 900; line-height: 1.15; }
 
+  .sec-stack { display: flex; flex-direction: column; gap: 1.6mm; }
+  .sec {
+    border: 1px solid #333; border-radius: 4px; padding: 1.5mm 2.2mm;
+    font-size: calc(8pt * var(--p-scale)); line-height: 1.3;
+    page-break-inside: avoid; break-inside: avoid;
+  }
+  .sec-t {
+    font-size: calc(8.6pt * var(--p-scale)); font-weight: 900;
+    border-bottom: 1px solid #888; margin-bottom: 1mm; padding: 0.4mm 1.6mm;
+    background: #eeeeee; border-radius: 2px;
+  }
+  .hl {
+    border: 1px solid #000; background: #f4f4f4;
+    padding: 1mm 1.8mm; border-radius: 3px; margin: 0.8mm 0; font-weight: bold;
+  }
+  .hl-strong {
+    border: 1.8px solid #000; background: #fef3c7;
+    padding: 1.2mm 1.8mm; border-radius: 3px; margin: 0.8mm 0; font-weight: bold;
+  }
+  .pin {
+    display: inline-block; border: 1.8px solid #000; padding: 0.4mm 3.5mm;
+    font-size: calc(11.5pt * var(--p-scale)); font-weight: 900; letter-spacing: 3px;
+    border-radius: 4px; margin-left: 2mm; background: #fff;
+  }
+
+  /* Wi-Fi 3分割テーブル */
+  .wifi-tbl {
+    width: 100%; border-collapse: collapse; border: 1.2px solid #333;
+    text-align: center; font-size: calc(7.8pt * var(--p-scale)); font-weight: 900;
+    background: #fff; margin-bottom: 0.8mm;
+  }
+  .wifi-tbl td { padding: 1mm 1.5mm; border-right: 1px solid #333; }
+  .wifi-tbl td:last-child { border-right: none; }
+  .wifi-note {
+    font-size: calc(6.5pt * var(--p-scale)); color: #333; text-align: left; margin-bottom: 1.2mm;
+  }
+
+  @media screen {
+    .a5-page-1 { border-bottom: 2px dashed #94a3b8; padding-bottom: 12px; margin-bottom: 16px; }
+  }
   @media print {
-    html, body { background: #fff; }
     .no-print-bar { display: none !important; }
-    .a5-wrap { max-width: 100%; width: 100%; margin: 0; padding: 0; box-shadow: none; border-radius: 0; }
-    .a5-page-1 { border-bottom: none; padding-bottom: 0; margin-bottom: 0; page-break-after: always; break-after: page; }
+    .a5-wrap { max-width: 100%; width: 100%; padding: 0; }
+    .a5-page-1 {
+      border-bottom: none; padding-bottom: 0; margin-bottom: 0;
+      page-break-after: always; break-after: page;
+    }
     .a5-page-2 { page-break-after: avoid; break-after: avoid; }
   }
 </style>
 </head>
 <body>
-  <div class="no-print-bar">
-    <div>
-      <button class="sz-btn" onclick="setScale(0.92, this)">小</button>
-      <button class="sz-btn active" onclick="setScale(1.0, this)">標準</button>
-      <button class="sz-btn" onclick="setScale(1.12, this)">大</button>
-    </div>
-    <button class="np-btn" onclick="window.print()">🖨️ 印刷する</button>
+
+<div class="no-print-bar">
+  <div>
+    <span>文字サイズ:</span>
+    <button class="sz-btn" onclick="setScale(0.92, this)">小</button>
+    <button class="sz-btn active" onclick="setScale(1.0, this)">標準 (A5・2枚最適)</button>
+    <button class="sz-btn" onclick="setScale(1.08, this)">大</button>
   </div>
-
-  <div class="a5-wrap">
-    <!-- 1枚目 -->
-    <div class="a5-page-1">
-      <div class="hdr">
-        <div class="h-title">亀の井ホテル 草津湯畑 館内のご案内 (1/2)</div>
-        <div class="h-rm" id="rmDisp1">ご宿泊ゲスト様</div>
-      </div>
-
-      <div class="ticket">
-        <div class="tk-head">
-          <span>🍽️ 本館3階 レストラン「BOLD KITCHEN」お食事券</span>
-          <span>※会場へお持ちください</span>
-        </div>
-        <div class="tk-grid">
-          <div class="tk-box"><div class="tk-lbl">ご夕食時間 / DINNER (90分制)</div><div class="tk-val" id="dinDisp">--:--</div></div>
-          <div class="tk-box"><div class="tk-lbl">ご朝食時間 / BREAKFAST (60分制)</div><div class="tk-val" id="brkDisp">--:--</div></div>
-        </div>
-      </div>
-
-      <div class="sec-stack">
-        <div class="sec">
-          <div class="sec-t">① フロント（本館4階）・お部屋のご案内</div>
-          フロントは<b>本館4階</b>です。<div class="hl" id="routeDisp"></div>
-        </div>
-        <div class="sec">
-          <div class="sec-t">② レストラン（本館3階） ／ ③ 無料「夜鳴き担々麺」</div>
-          ・お選びいただいた時間の書いたこの画面（または紙）を<b>本館3階レストラン会場</b>へお持ちください（バイキング形式です）。<br>
-          ・夜 <b>21:00〜22:30（ラストオーダー）</b>にて無料の<b>夜鳴き担々麺（1名様1杯）</b>を提供しております。今月は <b>【 <span id="tanDisp">赤</span> 】</b> の味です。
-        </div>
-        <div class="sec">
-          <div class="sec-t">④ 温泉（15:00〜翌朝9:30）・お浴衣・アメニティのご案内</div>
-          <div class="hl">♨️ <b>3か所すべて利用可：</b> <b>本館1階</b> 大浴場/露天風呂 ・ <b>本館2階</b> ひのき風呂 ・ <b>東館1階</b> 岩風呂</div>
-          ・<b>深夜0:00〜1:00</b>は清掃時間のためご利用できません。<b>バスタオル／フェイスタオルはお部屋からお持ち出しください。</b>浴場の床は滑りやすいのでご注意ください。<br>
-          ・<b>お浴衣・アメニティ類</b>はお部屋にございません。<b>4階フロントとなりのコーナー</b>からご自由にお取りください（タオル類・浴衣の帯・ハブラシはお部屋にございます）。
-        </div>
-      </div>
-    </div>
-
-    <!-- 2枚目 -->
-    <div class="a5-page-2">
-      <div class="hdr">
-        <div class="h-title">亀の井ホテル 草津湯畑 館内のご案内 (2/2)</div>
-        <div class="h-rm" id="rmDisp2">ご宿泊ゲスト様</div>
-      </div>
-
-      <div class="sec-stack">
-        <div class="sec">
-          <div class="sec-t">⑤ チェックアウト（<span id="outDisp1">10:00</span>）・ご精算のご案内</div>
-          ・チェックアウトは <b id="outDisp2">10:00</b> です。ご宿泊費はチェックアウト時にご精算をお願いします。売店・レストランのお部屋付けもあわせてご精算ください。<br>
-          ・<b>事前決済を頂いているお客様も「入湯税」のお支払いが別途必要</b>です。<br>
-          <div class="hl">💡 チェックアウトのお時間はフロント大変混雑いたします。<b>事前精算（10:00まで）</b>のご活用をおすすめします。</div>
-        </div>
-        <div class="sec">
-          <div class="sec-t">⑥ 湯畑小路（本館1階 近道・暗証番号）のご案内</div>
-          ・湯畑／温泉街へお出かけされる場合は、<b>本館1階から近道</b>をご利用いただけます。外からホテルへ戻る際は扉に鍵がかかっておりますので、暗証番号（数字4ケタ）をご入力ください ➔ <span class="pin">🔑 <span id="pinDisp">1234</span></span>
-        </div>
-        <div class="sec">
-          <div class="sec-t">⑧ 駐車場・お荷物のお預かりについて</div>
-          ・駐車場、およびお荷物のお預かりは、<b>チェックアウト日の昼 12:00 まで</b>承っております。
-          <div class="hl" id="busPlanDisp" style="display:none;">🚌 <b>※バスプランのお客様</b>は、帰りのバス出発時刻である <b>13:30 まで</b> お預かりいたします。</div>
-        </div>
-        <div class="sec">
-          <div class="sec-t">⑨ 館内設備（喫煙スペース・アミューズメント・自販機）</div>
-          ・🚬 <b>喫煙スペース</b>：<b>本館2階 ひのき風呂の前</b> にございます。<br>
-          ・🏓 <b>アミューズメントコーナー（予約制）</b>：<b>卓球・ダーツ・ビリヤード</b>（料金：<b>1時間 550円</b> ／ フロントにてご予約承ります）。<br>
-          ・🥤 <b>自動販売機</b>：<b>4階 アミューズメントコーナー内</b> と <b>1階 大浴場前</b> にございます。<br>
-          ・🍺 <b>アルコール自販機</b>：<b>本館5階 エレベーターホール</b> にございます。
-        </div>
-     <div class="sec" style="text-align:center;">
-  <div class="sec-t" style="text-align:left;">⑦ フロント内線番号・館内無料 Wi-Fi のご案内</div>
-  <table style="width:100%; border-collapse:collapse; border:1.2px solid #333; text-align:center; font-size:calc(8pt * var(--p-scale)); font-weight:900; background:#fff; margin-bottom:1mm;">
-    <tr>
-      <td style="border-right:1px solid #333; padding:1mm 2mm; width:22%;">📶 Wi-fi</td>
-      <td style="border-right:1px solid #333; padding:1mm 2mm; width:39%;">SSID：KAMENOI-Wifi</td>
-      <td style="padding:1mm 2mm; width:39%;">PASSWORD：0334343939</td>
-    </tr>
-  </table>
-  <div style="font-size:calc(6.6pt * var(--p-scale)); color:#333; text-align:left; margin-bottom:1.2mm;">※一部の場所では繋がりにくい場合がございますのでご了承ください。</div>
-  なにかございましたら <b>フロント「内線9番」</b> にご連絡ください。<br>
-  <b>ごゆっくりお過ごしくださいませ。</b>
+  <button class="np-btn" onclick="window.print()">🖨️ OKI (A5縦・2枚)で印刷</button>
 </div>
+
+<div class="a5-wrap">
+  <!-- ================= 1ページ目 ================= -->
+  <div class="a5-page-1">
+    <div class="hdr">
+      <div class="h-title">亀の井ホテル 草津湯畑 館内のご案内 (1/2)</div>
+      <div class="h-rm" id="hdrRoom1">ご宿泊ゲスト様</div>
+    </div>
+
+    <!-- お食事時間の上：お部屋番号バナー -->
+    <div class="room-banner">
+      お客様のお部屋は <span id="roomBannerVal">  </span> 号室です
+    </div>
+
+    <!-- お食事券 -->
+    <div class="ticket">
+      <div class="tk-head">
+        <span>🍽️ 本館3階 レストラン「BOLD KITCHEN」お食事券</span>
+        <span>※会場へお持ちください</span>
+      </div>
+      <div class="tk-grid">
+        <div class="tk-box">
+          <div class="tk-lbl">ご夕食時間 / DINNER (90分制)</div>
+          <div class="tk-val" id="dinVal">--:--</div>
+        </div>
+        <div class="tk-box">
+          <div class="tk-lbl">ご朝食時間 / BREAKFAST (60分制)</div>
+          <div class="tk-val" id="brkVal">--:--</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-stack">
+      <div class="sec">
+        <div class="sec-t">① フロント(本館4階)・お部屋のご案内</div>
+        フロントは<b>本館4階</b>です。
+        <div class="hl" id="routeHtml"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">② レストラン(本館3階) / ③ 無料「夜鳴き担々麺」</div>
+        ・お選びいただいた時間の書いたこの紙を<b>本館3階レストラン会場</b>へお持ちください（バイキング形式です）。<br>
+        ・夜 <b>21:00〜22:30（ラストオーダー）</b>にて無料の<b>夜鳴き担々麺（1名様1杯）</b>を提供しております。今月は<b>【 <span id="tanVal">赤</span> 】</b>の味です。
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">④ 温泉(15:00〜翌朝9:30)・お浴衣・アメニティのご案内</div>
+        <div class="hl">
+          <b>3か所すべて利用可：</b><b>本館1階</b> 大浴場/露天風呂・<b>本館2階</b> ひのき風呂・<b>東館1階</b> 岩風呂
+        </div>
+        ・<b>深夜0:00〜1:00</b>は清掃時間のためご利用できません。<b>バスタオル/フェイスタオルはお部屋からお持ち出しください。</b>浴場の床は滑りやすいのでご注意ください。<br>
+        ・<b>お浴衣・アメニティ類</b>はお部屋にございません。<b>4階フロントとなりのコーナー</b>からご自由にお取りください（タオル類・浴衣の帯・ハブラシはお部屋にございます）。
       </div>
     </div>
   </div>
 
-  <script>
-    function setScale(val, btn) {
-      document.documentElement.style.setProperty('--p-scale', val);
-      document.querySelectorAll('.sz-btn').forEach(b => b.classList.remove('active'));
-      if (btn) btn.classList.add('active');
+  <!-- ================= 2ページ目 ================= -->
+  <div class="a5-page-2">
+    <div class="hdr">
+      <div class="h-title">亀の井ホテル 草津湯畑 館内のご案内 (2/2)</div>
+      <div class="h-rm" id="hdrRoom2">ご宿泊ゲスト様</div>
+    </div>
+
+    <div class="sec-stack">
+      <div class="sec">
+        <div class="sec-t">⑤ チェックアウト(<span id="outValTitle">10:00</span>)・ご精算のご案内</div>
+        ・チェックアウトは <b id="outValBody">10:00</b> です。ご宿泊費はチェックアウト時にご精算をお願いします。売店・レストランのお部屋付けもあわせてご精算ください。<br>
+        ・<b>事前決済を頂いているお客様も「入湯税」のお支払いが別途必要</b>です。<br>
+        <div id="checkoutSettleMsg" class="hl"></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">⑥ 湯畑小路(本館1階 近道・暗証番号)のご案内</div>
+        ・湯畑/温泉街へお出かけされる場合は、<b>本館1階から近道</b>をご利用いただけます。外からホテルへ戻る際は扉に鍵がかかっておりますので、暗証番号（数字4ケタ）をご入力ください → <span class="pin" id="pinVal">1234</span>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">⑧ 駐車場・お荷物のお預かりについて</div>
+        ・駐車場、およびお荷物のお預かりは、<b>チェックアウト日の昼 12:00 まで</b>承っております。
+        <div id="busNoteWrap" style="display:none;" class="hl">
+          <b>※バスプランのお客様</b>は、帰りのバス出発時刻である <b>13:30 まで</b> お預かりいたします。
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-t">⑨ 館内設備(喫煙スペース・アミューズメント・自販機)</div>
+        ・<b>喫煙スペース</b>：<b>本館2階 ひのき風呂の前</b> にございます。<br>
+        ・<b>アミューズメントコーナー（予約制）</b>：<b>卓球・ダーツ・ビリヤード</b>（料金：<b>1時間 550円</b> / フロントにてご予約承ります）。<br>
+        ・<b>自動販売機</b>：<b>4階 アミューズメントコーナー内</b> と <b>1階 大浴場前</b> にございます。<br>
+        ・<b>アルコール自販機</b>：<b>本館5階 エレベーターホール</b> にございます。
+      </div>
+
+      <div class="sec" style="text-align:center;">
+        <div class="sec-t" style="text-align:left;">⑦ フロント内線番号・館内無料 Wi-Fi のご案内</div>
+        <table class="wifi-tbl">
+          <tr>
+            <td style="width:22%;">📶 Wi-fi</td>
+            <td style="width:39%;">SSID：KAMENOI-Wifi</td>
+            <td style="width:39%;">PASSWORD：0334343939</td>
+          </tr>
+        </table>
+        <div class="wifi-note">※一部の場所では繋がりにくい場合がございますのでご了承ください。</div>
+        なにかございましたら <b>フロント「内線9番」</b> にご連絡ください。<br>
+        <b>ごゆっくりお過ごしくださいませ。</b>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setScale(val, btn) {
+    document.documentElement.style.setProperty('--p-scale', val);
+    try { localStorage.setItem('KAMENOI_A5_2PAGE_SCALE', val); } catch (e) {}
+    document.querySelectorAll('.sz-btn').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+  }
+
+  window.onload = function() {
+    // URLパラメータ取得
+    var params = new URLSearchParams(window.location.search);
+    var rm = (params.get('rm') || '').trim();
+    var din = (params.get('d') || '--:--').trim();
+    var brk = (params.get('b') || '--:--').trim();
+    var outT = (params.get('out') || '10:00').trim();
+    var pin = (params.get('pin') || '1234').trim();
+    var tan = (params.get('t') || '赤').trim();
+    var zone = (params.get('z') || 'main').trim();
+    var isBus = (params.get('bus') === '1');
+    var autoPrint = (params.get('print') === '1');
+
+    // 部屋番号反映
+    var hdrRm = rm ? (rm + ' 号室') : 'ご宿泊ゲスト様';
+    document.getElementById('hdrRoom1').innerText = hdrRm;
+    document.getElementById('hdrRoom2').innerText = hdrRm;
+    document.getElementById('roomBannerVal').innerText = rm || '  ';
+
+    // お食事・暗証番号・担々麺・チェックアウト反映
+    document.getElementById('dinVal').innerText = din;
+    document.getElementById('brkVal').innerText = brk;
+    document.getElementById('tanVal').innerText = tan;
+    document.getElementById('pinVal').innerText = pin;
+    document.getElementById('outValTitle').innerText = outT;
+    document.getElementById('outValBody').innerText = outT;
+
+    // 部屋ゾーン案内
+    var routeEl = document.getElementById('routeHtml');
+    if (zone === 'east') {
+      routeEl.innerHTML = '<b>【東館2・3階(2201〜2207 / 2301〜2307号室)】</b> <b>東館2階と本館4階(フロント)が同じ高さで連絡通路で結ばれております。</b>フロント階奥、「茶色の吊り看板」のところを左手に出て頂くと連絡通路です。';
+    } else if (zone === 'main89') {
+      routeEl.innerHTML = '<b>【本館8・9階(801〜808 / 901〜908号室) 重要】</b> 8・9階まで上がれるエレベーターは、<b>エントランス付近の一機のみ</b>でございます。';
+    } else {
+      routeEl.innerHTML = '<b>【本館2・5・6・7階(201〜208 / 501〜714号室)】</b> 本館エレベーターにて各客室階へお進みください。';
     }
 
-    window.onload = function() {
-      var p = new URLSearchParams(window.location.search);
-      var rm   = (p.get('rm')  || '').trim();
-      var din  = (p.get('d')   || '--:--').trim();
-      var brk  = (p.get('b')   || '--:--').trim();
-      var outT = (p.get('out') || '10:00').trim();
-      var pin  = (p.get('pin') || '1234').trim();
-      var tan  = (p.get('t')   || '赤').trim();
-      var zone = (p.get('z')   || 'main').trim();
+    // ⑤ チェックアウト精算案内（10:30 / 11:00 は必須案内、通常は朝7:00〜事前精算案内）
+    var settleEl = document.getElementById('checkoutSettleMsg');
+    if (outT === '10:30' || outT === '11:00') {
+      settleEl.className = 'hl-strong';
+      settleEl.innerHTML = '【お願い】' + outT + 'チェックアウトのお客様は、<b>お手数ですが一度 朝7:00〜10:00までにフロントにお立ち寄りの上、ご精算ください。</b>';
+    } else {
+      settleEl.className = 'hl';
+      settleEl.innerHTML = 'チェックアウトのお時間はフロント大変混雑いたします。<b>事前精算（朝7:00〜）</b>のご活用をおすすめします。';
+    }
 
-      var rmText = rm ? (rm + ' 号室') : 'ご宿泊ゲスト様';
-      document.getElementById('rmDisp1').innerText = rmText;
-      document.getElementById('rmDisp2').innerText = rmText;
-      document.getElementById('dinDisp').innerText = din;
-      document.getElementById('brkDisp').innerText = brk;
-      document.getElementById('outDisp1').innerText = outT;
-      document.getElementById('outDisp2').innerText = outT;
-      document.getElementById('pinDisp').innerText = pin;
-      document.getElementById('tanDisp').innerText = tan;
+    // バスプラン表示
+    if (isBus) {
+      document.getElementById('busNoteWrap').style.display = 'block';
+    }
 
-      var routeHtml = '🏢 <b>【本館 2・5・6・7階（201〜208 / 501〜714号室）】</b> 本館エレベーターにて各客室階へお進みください。';
-      if (zone === 'east') {
-        routeHtml = '🌉 <b>【東館 2・3階（2201〜2207 / 2301〜2307号室）】</b> <b>東館2階と本館4階（フロント）が同じ高さで連絡通路で結ばれております。</b>フロント階奥、「茶色の吊り看板」のところを左手に出て頂くと連絡通路です。';
-      } else if (zone === 'main89') {
-        routeHtml = '🛗 <b>【本館 8・9階（801〜808 / 901〜908号室）重要】</b> 8・9階まで上がれるエレベーターは、<b>エントランス付近の一機のみ</b>でございます。';
+    // 保存済み文字サイズ復元
+    try {
+      var saved = localStorage.getItem('KAMENOI_A5_2PAGE_SCALE');
+      if (saved) {
+        document.documentElement.style.setProperty('--p-scale', saved);
+        document.querySelectorAll('.sz-btn').forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('onclick').indexOf(saved) !== -1);
+        });
       }
-      document.getElementById('routeDisp').innerHTML = routeHtml;
+    } catch (e) {}
 
-      if (p.get('bus') === '1') {
-        document.getElementById('busPlanDisp').style.display = 'block';
-      }
-
-      if (p.get('print') === '1') {
-        setTimeout(function() { window.print(); }, 250);
-      }
-    };
-  </script>
+    // 自動印刷
+    if (autoPrint) {
+      setTimeout(function() { window.print(); }, 250);
+    }
+  };
+</script>
 </body>
 </html>

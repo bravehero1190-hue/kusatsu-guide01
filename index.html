@@ -117,8 +117,8 @@
         </div>
         <div class="sec">
           <div class="sec-t">⑧ 駐車場・お荷物のお預かりについて</div>
-          ・駐車場、およびお荷物のお預かりは、<b>チェックアウト日の昼 12:00 まで</b>承っております。<br>
-          <div class="hl">🚌 <b>※バスプランのお客様</b>は、帰りのバス出発時刻である <b>13:30 まで</b> お預かりいたします。</div>
+          ・駐車場、およびお荷物のお預かりは、<b>チェックアウト日の昼 12:00 まで</b>承っております。
+          <div class="hl" id="busPlanDisp" style="display:none;">🚌 <b>※バスプランのお客様</b>は、帰りのバス出発時刻である <b>13:30 まで</b> お預かりいたします。</div>
         </div>
         <div class="sec">
           <div class="sec-t">⑨ 館内設備（喫煙スペース・アミューズメント・自販機）</div>
@@ -170,6 +170,10 @@
         routeHtml = '🛗 <b>【本館 8・9階（801〜808 / 901〜908号室）重要】</b> 8・9階まで上がれるエレベーターは、<b>エントランス付近の一機のみ</b>でございます。';
       }
       document.getElementById('routeDisp').innerHTML = routeHtml;
+
+      if (p.get('bus') === '1') {
+        document.getElementById('busPlanDisp').style.display = 'block';
+      }
 
       if (p.get('print') === '1') {
         setTimeout(function() { window.print(); }, 250);
